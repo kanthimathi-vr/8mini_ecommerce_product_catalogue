@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Your Cart - Mini E-commerce{% endblock %}
+
+{% block content %}
+<h1>Your Cart</h1>
+{% if cart_item %}
+<div class="cart-item">
+    <img src="{{ url_for('static', filename=cart_item.product.image) }}" alt="{{ cart_item.product.name }}" />
+    <div class="cart-details">
+        <h3>{{ cart_item.product.name }}</h3>
+        <p>Quantity: {{ cart_item.quantity }}</p>
+        <p>Price per item: ${{ "%.2f"|format(cart_item.product.price) }}</p>
+        <p><strong>Total: ${{ "%.2f"|format(cart_item.product.price * cart_item.quantity) }}</strong></p>
+    </div>
+</div>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+<a href="{{ url_for('home') }}" class="btn back-btn">Continue Shopping</a>
+{% endblock %}
